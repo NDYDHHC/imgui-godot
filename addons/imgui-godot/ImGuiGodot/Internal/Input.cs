@@ -14,12 +14,21 @@ internal class Input
     internal System.Numerics.Vector2 CurrentSubViewportPos { get; set; }
     private Vector2 _mouseWheel = Vector2.Zero;
     private ImGuiMouseCursor _currentCursor = ImGuiMouseCursor.None;
+    private readonly bool _displayServerEmbedded = DisplayServer.GetName() == "embedded";
     private readonly bool _hasMouse = DisplayServer.HasFeature(DisplayServer.Feature.Mouse);
     private bool _takingTextInput = false;
+    private Vector2 _lastMousePosition = Vector2.Zero;
+
+    private Vector2I GetMousePosition()
+    {
+        // macOS "embedded" DisplayServer has very limited features
+        return _displayServerEmbedded ? (Vector2I)_lastMousePosition :
+            DisplayServer.MouseGetPosition();
+    }
 
     protected virtual void UpdateMousePos(ImGuiIOPtr io)
     {
-        var mousePos = DisplayServer.MouseGetPosition();
+        var mousePos = GetMousePosition();
 
         if (io.ConfigFlags.HasFlag(ImGuiConfigFlags.ViewportsEnable))
         {
@@ -100,7 +109,7 @@ internal class Input
 
     public void Update(ImGuiIOPtr io)
     {
-        if (_hasMouse)
+        if (_hasMouse || _displayServerEmbedded)
             UpdateMouse(io);
 
         PreviousSubViewport = CurrentSubViewport;
@@ -118,7 +127,7 @@ internal class Input
             if (vpEvent is InputEventMouse mouseEvent)
             {
                 var io = ImGui.GetIO();
-                var mousePos = DisplayServer.MouseGetPosition();
+                var mousePos = GetMousePosition();
                 var windowPos = Vector2I.Zero;
                 if (!io.ConfigFlags.HasFlag(ImGuiConfigFlags.ViewportsEnable))
                     windowPos = State.Instance.Layer.GetWindow().Position;
@@ -153,6 +162,7 @@ internal class Input
         if (evt is InputEventMouseMotion mm)
         {
             consumed = io.WantCaptureMouse;
+            _lastMousePosition = mm.Position;
             mm.Dispose();
         }
         else if (evt is InputEventMouseButton mb)

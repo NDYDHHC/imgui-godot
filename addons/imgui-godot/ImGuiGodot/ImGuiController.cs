@@ -118,8 +118,12 @@ public partial class ImGuiController : Node
                 AddChild(newLayer);
             else
                 window.AddChild(newLayer);
-            ImGui.GetIO().BackendFlags |= ImGuiBackendFlags.PlatformHasViewports
-                | ImGuiBackendFlags.HasMouseHoveredViewport;
+
+            if (DisplayServer.HasFeature(DisplayServer.Feature.Subwindows))
+            {
+                ImGui.GetIO().BackendFlags |= ImGuiBackendFlags.PlatformHasViewports
+                    | ImGuiBackendFlags.HasMouseHoveredViewport;
+            }
         }
         else if (vp is SubViewport svp)
         {
