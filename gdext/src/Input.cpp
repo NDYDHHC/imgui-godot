@@ -27,8 +27,16 @@ struct Input::Impl
     Vector2 currentSubViewportPos;
     Vector2 mouseWheel;
     ImGuiMouseCursor currentCursor = ImGuiMouseCursor_None;
+    bool displayServerEmbedded = false;
     bool hasMouse = false;
     bool takingTextInput = false;
+    Vector2 lastMousePosition;
+
+    Vector2i GetMousePosition()
+    {
+        return displayServerEmbedded ? (Vector2i)lastMousePosition
+                                     : DisplayServer::get_singleton()->mouse_get_position();
+    }
 };
 
 namespace {
@@ -74,6 +82,7 @@ void UpdateKeyMods(ImGuiIO& io)
 Input::Input() : impl(std::make_unique<Impl>())
 {
     impl->hasMouse = DisplayServer::get_singleton()->has_feature(DisplayServer::FEATURE_MOUSE);
+    impl->displayServerEmbedded = DisplayServer::get_singleton()->get_name() == "embedded";
 }
 
 Input::~Input()
@@ -85,7 +94,7 @@ void Input::UpdateMousePos()
     ImGuiIO& io = ImGui::GetIO();
 
     DisplayServer* DS = DisplayServer::get_singleton();
-    Vector2i mousePos = DS->mouse_get_position();
+    Vector2i mousePos = impl->GetMousePosition();
 
     if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
     {
@@ -162,7 +171,7 @@ void Input::UpdateMouse()
 
 void Input::Update()
 {
-    if (impl->hasMouse)
+    if (impl->hasMouse || impl->displayServerEmbedded)
         UpdateMouse();
 
     impl->previousSubViewport = impl->currentSubViewport;
@@ -180,7 +189,7 @@ void Input::ProcessSubViewportWidget(const Ref<InputEvent>& evt)
         if (Ref<InputEventMouse> me = vpevt; me.is_valid())
         {
             ImGuiIO& io = ImGui::GetIO();
-            Vector2i mousePos = DisplayServer::get_singleton()->mouse_get_position();
+            Vector2i mousePos = impl->GetMousePosition();
             Vector2i windowPos{0, 0};
             if (!(io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable))
                 windowPos = GetContext()->layer->get_window()->get_position();
@@ -213,6 +222,7 @@ bool Input::HandleEvent(const Ref<InputEvent>& evt)
 
     if (Ref<InputEventMouseMotion> mm = evt; mm.is_valid())
     {
+        impl->lastMousePosition = mm->get_position();
         consumed = io.WantCaptureMouse;
     }
     else if (Ref<InputEventMouseButton> mb = evt; mb.is_valid())
