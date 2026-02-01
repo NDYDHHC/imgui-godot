@@ -10,7 +10,7 @@ runs:
   steps:
     - uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 8.0.x
+        dotnet-version: 10.0.x
 
     - name: Install GodotEnv
       shell: bash
@@ -27,5 +27,5 @@ runs:
           mkdir .godot
           echo "res://addons/imgui-godot/imgui-godot-native.gdextension" > .godot/extension_list.cfg
         fi
-        $GODOT --headless --import || true
+        $GODOT --headless --import
         echo "GAMEDIR=$(pwd)" >> $GITHUB_ENV

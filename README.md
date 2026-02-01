@@ -1,8 +1,8 @@
 # Dear ImGui plugin for Godot 4
 
-![](https://img.shields.io/static/v1?label=Godot&message=4.2&color=blue&logo=godotengine)
-![](https://img.shields.io/static/v1?label=Godot&message=4.3&color=blue&logo=godotengine)
 ![](https://img.shields.io/static/v1?label=Godot&message=4.4&color=blue&logo=godotengine)
+![](https://img.shields.io/static/v1?label=Godot&message=4.5&color=blue&logo=godotengine)
+![](https://img.shields.io/static/v1?label=Godot&message=4.6&color=blue&logo=godotengine)
 
 ![](https://github.com/pkdawson/imgui-godot/actions/workflows/dotnet.yml/badge.svg)
 ![](https://github.com/pkdawson/imgui-godot/actions/workflows/godot.yml/badge.svg)
@@ -56,9 +56,9 @@ You can also find Dear ImGui for Godot in the Asset Library.
 > [!IMPORTANT]
 > If you are using the GDExtension, you must use a version of ImGui.NET which matches the version that the GDExtension was built with.
 
-4. Back in the Godot editor, click `Build`.
+1. Back in the Godot editor, click `Build`.
 
-5. Enable the plugin in `Project > Project Settings > Plugins`.
+2. Enable the plugin in `Project > Project Settings > Plugins`.
 
 ## Getting Started (GDScript)
 

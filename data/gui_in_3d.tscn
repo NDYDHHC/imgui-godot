@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://0iek6ri88gkb"]
 
 [ext_resource type="PackedScene" uid="uid://dvl383ispakmn" path="res://data/gui_panel_3d.tscn" id="1"]
-[ext_resource type="Script" path="res://src/ThirdNode.cs" id="2_xsiun"]
+[ext_resource type="Script" uid="uid://crv1s2ggxtoi2" path="res://src/ThirdNode.cs" id="2_xsiun"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1lgdv"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -34,7 +34,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_uw4n0"]
 _data = {
-"Move_camera": SubResource("1")
+&"Move_camera": SubResource("1")
 }
 
 [sub_resource type="PlaneMesh" id="2"]

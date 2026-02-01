@@ -69,7 +69,6 @@ internal sealed class RdRendererThreadSafe : RdRenderer, IRenderer
 {
     public new string Name => "godot4_net_rd_mt";
 
-#if GODOT4_3_OR_GREATER
     public new void Render()
     {
         var pio = ImGui.GetPlatformIO();
@@ -103,60 +102,5 @@ internal sealed class RdRendererThreadSafe : RdRenderer, IRenderer
         FreeUnusedTextures();
         dataArray.Dispose();
     }
-#else
-    private SharedList? _dataToDraw;
-
-    public RdRendererThreadSafe()
-    {
-        // draw on the renderer thread to avoid conflicts
-        RenderingServer.FramePreDraw += OnFramePreDraw;
-    }
-
-    ~RdRendererThreadSafe()
-    {
-        RenderingServer.FramePreDraw -= OnFramePreDraw;
-    }
-
-    public new void Render()
-    {
-        var pio = ImGui.GetPlatformIO();
-        var newData = new SharedList(pio.Viewports.Size);
-
-        for (int i = 0; i < pio.Viewports.Size; ++i)
-        {
-            var vp = pio.Viewports[i];
-            if (vp.Flags.HasFlag(ImGuiViewportFlags.IsMinimized))
-                continue;
-
-            ReplaceTextureRids(vp.DrawData);
-            Rid vprid = Util.ConstructRid((ulong)vp.RendererUserData);
-            newData.Add(new(GetFramebuffer(vprid), new(vp.DrawData)));
-        }
-
-        // if a frame was skipped, free old data
-        var oldData = System.Threading.Interlocked.Exchange(ref _dataToDraw, newData);
-        oldData?.Dispose();
-    }
-
-    private SharedList TakeSharedData()
-    {
-        var rv = System.Threading.Interlocked.Exchange(ref _dataToDraw, null);
-        return rv ?? [];
-    }
-
-    private void OnFramePreDraw()
-    {
-        // take ownership of shared data
-        using SharedList dataArray = TakeSharedData();
-
-        foreach (var (fb, clone) in dataArray)
-        {
-            if (RD.FramebufferIsValid(fb))
-                RenderOne(fb, clone.Data);
-        }
-
-        FreeUnusedTextures();
-    }
-#endif
 }
 #endif

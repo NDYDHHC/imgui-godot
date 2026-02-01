@@ -44,3 +44,4 @@ export/
 **/bin/Debug/
 **/bin/Release/
 **/obj/
+**/BenchmarkDotNet.Artifacts/

@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dr8hy6iu5hk8a"]
 
-[ext_resource type="Script" path="res://src/ViewportArea.cs" id="2_btjlu"]
-[ext_resource type="Script" path="res://src/MySecondNode.cs" id="2_gnjei"]
+[ext_resource type="Script" uid="uid://q0xh7m2w7xxg" path="res://src/ViewportArea.cs" id="2_btjlu"]
+[ext_resource type="Script" uid="uid://c0bk57ay6v7ji" path="res://src/MySecondNode.cs" id="2_gnjei"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_dsg5q"]
 size = Vector2(250, 250)
