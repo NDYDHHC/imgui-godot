@@ -15,7 +15,7 @@ runs:
     - name: Install GodotEnv
       shell: bash
       run: |
-        dotnet tool install --global Chickensoft.GodotEnv
+        dotnet tool install --global Chickensoft.GodotEnv --version 2.16.1
 
     - name: Prep
       shell: bash
