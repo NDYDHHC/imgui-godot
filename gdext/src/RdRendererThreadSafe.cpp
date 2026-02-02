@@ -5,6 +5,7 @@
 #include <godot_cpp/classes/rendering_server.hpp>
 #include <godot_cpp/variant/utility_functions.hpp>
 #include <mutex>
+#include <vector>
 
 using namespace godot;
 

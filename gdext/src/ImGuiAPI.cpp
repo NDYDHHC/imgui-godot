@@ -2,6 +2,7 @@
 #include <godot_cpp/classes/engine.hpp>
 #include <godot_cpp/classes/node.hpp>
 #include <godot_cpp/variant/utility_functions.hpp>
+#include <unordered_map>
 
 using namespace godot;
 

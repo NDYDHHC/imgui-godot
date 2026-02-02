@@ -285,7 +285,7 @@ void RdRenderer::Render(RID fb, ImDrawData* drawData)
         impl->SetupBuffers(drawData);
 
     // draw
-    const int64_t dl = RD->draw_list_begin(fb, RenderingDevice::DrawFlags::DRAW_CLEAR_ALL, impl->clearColors);
+    const int64_t dl = RD->draw_list_begin(fb, RenderingDevice::DRAW_CLEAR_ALL, impl->clearColors);
 
     RD->draw_list_bind_render_pipeline(dl, impl->pipeline);
     RD->draw_list_set_push_constant(dl, pcbuf, pcbuf.size());
