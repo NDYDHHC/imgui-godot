@@ -1,8 +1,8 @@
 # Dear ImGui plugin for Godot 4
 
-![](https://img.shields.io/static/v1?label=Godot&message=4.4&color=blue&logo=godotengine)
 ![](https://img.shields.io/static/v1?label=Godot&message=4.5&color=blue&logo=godotengine)
 ![](https://img.shields.io/static/v1?label=Godot&message=4.6&color=blue&logo=godotengine)
+![](https://img.shields.io/static/v1?label=Godot&message=4.7&color=blue&logo=godotengine)
 
 ![](https://github.com/pkdawson/imgui-godot/actions/workflows/dotnet.yml/badge.svg)
 ![](https://github.com/pkdawson/imgui-godot/actions/workflows/godot.yml/badge.svg)

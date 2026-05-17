@@ -8,7 +8,7 @@ import subprocess
 
 if not os.path.exists("godot-cpp"):
     subprocess.call(
-        "git clone -b 4.4 https://github.com/godotengine/godot-cpp", shell=True
+        "git clone -b 4.5 https://github.com/godotengine/godot-cpp", shell=True
     )
 
 if not os.path.exists("imgui"):

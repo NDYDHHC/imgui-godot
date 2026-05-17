@@ -45,3 +45,5 @@ export/
 **/bin/Release/
 **/obj/
 **/BenchmarkDotNet.Artifacts/
+
+*.lscache

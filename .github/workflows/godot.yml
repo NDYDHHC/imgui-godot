@@ -10,7 +10,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        gdver: ["4.4.1", "4.5.1", "4.6.0"]
+        gdver: ["4.5.2", "4.6.2", "4.7.0-beta.2"]
         include:
           - os: ubuntu-latest
             name: 🐧🧪C# Only
