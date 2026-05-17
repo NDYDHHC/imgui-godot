@@ -8,11 +8,11 @@ import subprocess
 
 if not os.path.exists("godot-cpp"):
     subprocess.call(
-        "git clone -b 4.2 https://github.com/godotengine/godot-cpp", shell=True
+        "git clone -b 4.2 https://github.com/NDYDHHC/godot-cpp", shell=True
     )
 
 if not os.path.exists("imgui"):
-    subprocess.call("git clone -b docking https://github.com/ocornut/imgui", shell=True)
+    subprocess.call("git clone -b docking https://github.com/NDYDHHC/imgui", shell=True)
     subprocess.call(f"git -C imgui checkout {IMGUI_TAG}", shell=True)
 
 if not os.path.exists("implot"):

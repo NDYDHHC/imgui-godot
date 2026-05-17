@@ -9,14 +9,14 @@ project(gdexample CXX)
 include(FetchContent)
 FetchContent_Declare(
     godot-cpp
-    GIT_REPOSITORY https://github.com/godotengine/godot-cpp
+    GIT_REPOSITORY https://github.com/NDYDHHC/godot-cpp
     GIT_TAG 4.2
 )
 FetchContent_MakeAvailable(godot-cpp)
 
 FetchContent_Declare(
     imgui
-    GIT_REPOSITORY https://github.com/ocornut/imgui
+    GIT_REPOSITORY https://github.com/NDYDHHC/imgui
     GIT_TAG v1.91.6-docking
 )
 FetchContent_MakeAvailable(imgui)
